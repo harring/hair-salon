@@ -12,7 +12,7 @@ We are two bachelor students studying software engineering and we are using this
 
 In addition to practicing our coding skills, we are also using this project as an opportunity to practice full-stack development. This means that we will be working on both the front-end (client-side) and back-end (server-side) of the web page.
 
-On the front-end, we will be using HTML, CSS, and JavaScript to design and style the web page. On the back-end, we will be using a server-side language (Vue) to handle the logic and data storage (MongoDB)for the web page.
+On the front-end, we will be using HTML, CSS, and JavaScript to design and style the web page. On the back-end, we will be using a server-side language (Node.js) to handle the logic and data storage (MongoDB)for the web page.
 
 By working on both the front-end and back-end of the web page, we will have the opportunity to practice our full-stack development skills and gain a deeper understanding of how web applications are built.
 
