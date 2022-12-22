@@ -6,6 +6,8 @@ var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
 
+var openingHoursController = require('./controllers/openingHours');
+
 // MongoDB variables and connection
 //TEMPORARY DB 
 var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://admin:iRgTxeQtT2BfT2uw@cluster0.szb6bsp.mongodb.net/test;'
@@ -36,6 +38,8 @@ app.use(cors());
 app.get('/api', function(req, res) {
     res.json({'message': 'Test message'});
 });
+
+app.use(openingHoursController);
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {
