@@ -39,7 +39,7 @@ app.get('/api', function(req, res) {
     res.json({'message': 'Test message'});
 });
 
-app.use(openingHoursController);
+app.use('/api', openingHoursController);
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {
