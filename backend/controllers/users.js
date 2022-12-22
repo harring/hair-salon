@@ -29,4 +29,20 @@ router.get('/users/:id', function(req, res, next) {
     });
 });
 
+// Update the user with the given ID
+router.put('/users/:id', function(req, res, next) {
+    var id = req.params.id;
+    User.findById(id, function(err, user) {
+        if (err) { return next(err); }
+        if (user === null) {
+            return res.status(404).json({'message': 'User not found!'});
+        }
+        user.username = req.body.username;
+        user.email = req.body.email;
+        user.password = req.body.password;
+        user.save();
+        res.json(user);
+    });
+ });
+
 module.exports = router;
