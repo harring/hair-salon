@@ -19,4 +19,16 @@ router.get('/openingHours', function(req, res, next){
     })
 });
 
+//Get a specific openingHour by its ID
+router.get('/openingHours/:id', function(req, res, next){
+    var id = req.params.id;
+    OpeningHours.findById(id, function(err, openingHours){
+        if (err){return next(err); }
+        if(openingHours === null) {
+            return res.status(404)
+        }
+        res.status(200).json(openingHours);
+    })
+});
+
 module.exports = router;
