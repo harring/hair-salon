@@ -7,6 +7,8 @@ var cors = require('cors');
 var history = require('connect-history-api-fallback');
 require('dotenv').config()
 
+var usersController = require('./controllers/users');
+
 // MongoDB variables and connection
 var mongoURI = process.env.MONGODB_URI;
 var port = process.env.PORT;
@@ -36,6 +38,8 @@ app.use(cors());
 app.get('/api', function(req, res) {
     res.json({'message': 'Test message'});
 });
+
+app.use('/api',usersController);
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {
