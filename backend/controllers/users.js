@@ -44,5 +44,16 @@ router.put('/users/:id', function(req, res, next) {
         res.json(user);
     });
  });
+// Delete user by id
+router.delete('/users/:id', function(req, res, next) {
+    var id = req.params.id;
+    User.findOneAndDelete({_id: id}, function(err, user) {
+        if (err) { return next(err); }
+        if (user === null) {
+            return res.status(404).json({'message': 'User not found'});
+        }
+        res.json(user);
+    });
+});
 
 module.exports = router;
