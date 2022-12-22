@@ -5,13 +5,13 @@ var morgan = require('morgan');
 var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
+require('dotenv').config()
 
 var openingHoursController = require('./controllers/openingHours');
 
 // MongoDB variables and connection
-//TEMPORARY DB 
-var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://admin:iRgTxeQtT2BfT2uw@cluster0.szb6bsp.mongodb.net/test;'
-var port = process.env.PORT || 3000;
+var mongoURI = process.env.MONGODB_URI;
+var port = process.env.PORT;
 
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, function(err) {
     if (err) {
