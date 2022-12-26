@@ -7,6 +7,7 @@ var cors = require('cors');
 var history = require('connect-history-api-fallback');
 require('dotenv').config()
 
+var openingHoursController = require('./controllers/openingHours');
 var usersController = require('./controllers/users');
 
 // MongoDB variables and connection
@@ -39,11 +40,12 @@ app.get('/api', function(req, res) {
     res.json({'message': 'Test message'});
 });
 
+app.use('/api', openingHoursController);
 app.use('/api',usersController);
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {
-    res.status(404).json({ 'message': 'Not Found' });
+    res.status(404).json({ 'message': 'API Not Found' }); //If you get this your api call is most likely spelled wrongly or missing a slash
 });
 
 // Configuration for serving frontend in production mode
