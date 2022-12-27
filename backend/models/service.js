@@ -11,4 +11,4 @@ var serviceSchema = new Schema({
    image: { type: String}
 });
 
-module.exports = mongoose.model('Services', serviceSchema);
+module.exports = mongoose.model('Service', serviceSchema);
