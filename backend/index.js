@@ -10,6 +10,8 @@ require('dotenv').config()
 var openingHoursController = require('./controllers/openingHours');
 var usersController = require('./controllers/users');
 
+var serviceController = require('./controllers/services');
+
 // MongoDB variables and connection
 var mongoURI = process.env.MONGODB_URI;
 var port = process.env.PORT;
@@ -42,6 +44,8 @@ app.get('/api', function(req, res) {
 
 app.use('/api', openingHoursController);
 app.use('/api',usersController);
+
+app.use('/api', serviceController);
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {
