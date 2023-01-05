@@ -1,4 +1,5 @@
 <template>
+  <PageHeader />
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/services">Services</router-link> |
@@ -6,6 +7,18 @@
   </nav>
   <router-view />
 </template>
+
+<script>
+// @ is an alias to /src
+import PageHeader from "@/components/PageHeader.vue";
+
+export default {
+  name: "App",
+  components: {
+    PageHeader,
+  },
+};
+</script>
 
 <style>
 #app {
@@ -18,7 +31,7 @@
 
 nav {
   padding: 10px;
-  background-color: rgb(225, 225, 217);
+  background-color: #b5c0c8;
   border: 2px solid grey;
 }
 
@@ -29,6 +42,6 @@ nav a {
 }
 
 nav a.router-link-exact-active {
-  color: #484848;
+  color: #db2c44;
 }
 </style>
