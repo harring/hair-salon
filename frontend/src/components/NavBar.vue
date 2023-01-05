@@ -1,87 +1,64 @@
 <template>
-  <nav id="nav">
-    <a href="/"> <img src="@/assets/scissor.png" alt="Home" /> HOME </a>
-    <a href="/"> <img src="@/assets/scissor.png" alt="About" /> ABOUT </a>
-    <a href="/"> <img src="@/assets/scissor.png" alt="Services" /> SERVICES </a>
+  <nav>
+    <div class="link-container" id="navContainer">
+      <router-link to="/">
+        <img v-bind:src="imageSrc" v-bind:style="imageStyle" />
+        Home
+      </router-link>
+    </div>
+    <div class="link-container">
+      <router-link to="/about">About</router-link>
+    </div>
+    <div class="link-container">
+      <router-link to="/services">Services</router-link>
+    </div>
   </nav>
 </template>
 
 <script>
 export default {
   name: "NavBar",
-  mounted() {
-    window.addEventListener("scroll", () => {
-      const navbar = document.getElementById("nav");
-      if (window.scrollY > 100) {
-        navbar.classList.add("scrolled");
-      } else {
-        navbar.classList.remove("scrolled");
-      }
-    });
+  data() {
+    return {
+      imageSrc: require("@/assets/scissor.png"),
+    };
   },
 };
 </script>
 
-<style scoped>
-#nav {
-  padding: 5px;
-  margin: 0px;
-  background-color: #187d96;
-  text-align: start;
-  border-bottom: 2px solid red;
-  position: sticky;
-  top: 0px;
-  /* z-index: to make sure google map stays behind sticky navbar */
-  z-index: 2;
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
 }
-#nav img {
-  height: 30px;
+
+img {
   width: 30px;
+  height: 30px;
+}
+
+.link-container {
+  display: inline-block;
+  margin: 3px;
   vertical-align: middle;
 }
-#nav.scrolled img {
-  display: inline-block;
-}
-a {
-  color: white;
-  font-weight: bold;
-  margin: 2px;
-  text-decoration: none;
-  text-align: justify;
+
+nav {
   padding: 5px;
-}
-a:link {
-  background-color: transparent;
-  text-decoration: none;
-}
-a:hover {
-  color: orange;
-  background-color: transparent;
-  text-decoration: none;
-}
-a:active {
-  color: yellow;
-  background-color: transparent;
-  text-decoration: none;
+  background-color: #187d96;
+  text-align: start;
+  border-bottom: 5px solid orange;
+  position: sticky;
 }
 
-@media (max-width: 600px) {
-  #nav {
-    display: flex;
-    flex-direction: column;
-  }
-
-  #nav a {
-    flex-direction: column;
-  }
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
 }
-@media (min-width: 600px) and (max-width: 1000px) {
-  #nav {
-    padding: 5px;
-  }
-
-  #nav a {
-    font-size: 1em;
-  }
+nav a.router-link-exact-active {
+  color: black;
 }
 </style>
