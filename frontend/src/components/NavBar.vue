@@ -43,13 +43,9 @@ h1 {
   top: 0;
   background: whitesmoke;
   border: 2px solid grey;
-  border-bottom-right-radius: 20px;
-  border-bottom-left-radius: 20px;
   height: 70px;
   display: flex;
   align-items: stretch;
-  width: 95%;
-  margin: 0 auto;
 }
 
 .nav-right {
