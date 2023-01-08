@@ -1,0 +1,693 @@
+{
+	"info": {
+		"_postman_id": "9202c643-7e40-4372-b9a0-c47e63bc4eb2",
+		"name": "Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25048066"
+	},
+	"item": [
+		{
+			"name": "Opening Hours",
+			"item": [
+				{
+					"name": "Post new openingHours",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseData = pm.response.json();\r",
+									"pm.globals.set(\"savedOpeningHours\", responseData._id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function() {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Postday\",\r\n    \"description\": \"This is a postman test\",\r\n    \"openingHours\": \"08001600\",\r\n    \"active\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/openingHours",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"openingHours"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all openingHours",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/openingHours",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"openingHours"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/openingHours/{{savedOpeningHours}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"openingHours",
+								"{{savedOpeningHours}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Updated Postday\",\r\n    \"description\": \"This is the updated postman test\",\r\n    \"openingHours\": \"08001600\",\r\n    \"active\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/openingHours/{{savedOpeningHours}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"openingHours",
+								"{{savedOpeningHours}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function() {\r",
+									"    pm.response.to.have.status(202);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/openingHours/{{savedOpeningHours}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"openingHours",
+								"{{savedOpeningHours}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User account",
+			"item": [
+				{
+					"name": "Post new user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseData = pm.response.json();",
+									"pm.globals.set(\"savedUser\", responseData._id);",
+									" ",
+									"pm.test(\"Status code is 201\", function () {",
+									"   pm.response.to.have.status(201);",
+									"});",
+									" ",
+									"pm.test(\"Body has correct username, email, password and id\", function () {",
+									"   var jsonData = pm.response.json();",
+									"   pm.expect(jsonData.username).to.eql(\"Tintin\");",
+									"   pm.expect(jsonData.email).to.eql(\"tintin@gmail.com\");",
+									"   pm.expect(jsonData.password).to.eql(\"tintin1234\");",
+									"});",
+									" ",
+									"pm.test(\"Body has _id\", function () {",
+									"   var jsonData = pm.response.json();",
+									"   pm.expect(jsonData._id).to.be.a('String');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"{{username}}\",\n    \"email\": \"{{email}}\",\n    \"password\": \"{{password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users/{{savedUser}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{savedUser}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Body has correct username, email and password\", function () {",
+									"   var jsonData = pm.response.json();",
+									"   pm.expect(jsonData.username).to.eql(\"Tintin\");",
+									"   pm.expect(jsonData.email).to.eql(\"tintin@gmail.com\");",
+									"   pm.expect(jsonData.password).to.eql(\"tintinNEW1234\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"{{username}}\",\n    \"email\": \"{{email}}\",\n    \"password\": \"tintinNEW1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users/{{savedUser}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{savedUser}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function() {",
+									"    pm.response.to.have.status(202);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/users/{{savedUser}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{savedUser}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Service",
+			"item": [
+				{
+					"name": "Post new service",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseData = pm.response.json();",
+									"pm.globals.set(\"savedService\", responseData._id);",
+									" ",
+									"pm.test(\"Status code is 201\", function () {",
+									"   pm.response.to.have.status(201);",
+									"});",
+									" ",
+									"pm.test(\"Body has correct name, description, price and image\", function () {",
+									"   var jsonData = pm.response.json();",
+									"   pm.expect(jsonData.name).to.eql(\"Hair cut\");",
+									"   pm.expect(jsonData.description).to.eql(\"Short hair cut for men\");",
+									"   pm.expect(jsonData.price).to.eql(299);",
+									"});",
+									" ",
+									"pm.test(\"Body has _id\", function () {",
+									"   var jsonData = pm.response.json();",
+									"   pm.expect(jsonData._id).to.be.a('String');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Hair cut\",\n    \"description\": \"Short hair cut for men\",\n    \"price\": \"299\",\n    \"image\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/services",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all services",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/services",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/services/{{savedService}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"services",
+								"{{savedService}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseData = pm.response.json();",
+									"pm.globals.set(\"savedService\", responseData._id);",
+									" ",
+									"pm.test(\"Status code is 200\", function () {",
+									"   pm.response.to.have.status(200);",
+									"});",
+									" ",
+									"pm.test(\"Body has correct name, description, price and image\", function () {",
+									"   var jsonData = pm.response.json();",
+									"   pm.expect(jsonData.name).to.eql(\"Hair cut\");",
+									"   pm.expect(jsonData.description).to.eql(\"Short hair cut for men\");",
+									"   pm.expect(jsonData.price).to.eql(399);",
+									"});",
+									" ",
+									"pm.test(\"Body has _id\", function () {",
+									"   var jsonData = pm.response.json();",
+									"   pm.expect(jsonData._id).to.be.a('String');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Hair cut\",\n    \"description\": \"Short hair cut for men\",\n    \"price\": \"399\",\n    \"image\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/services/{{savedService}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"services",
+								"{{savedService}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function() {",
+									"    pm.response.to.have.status(202);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/services/{{savedService}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"services",
+								"{{savedService}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "username",
+			"value": "Tintin",
+			"type": "string"
+		},
+		{
+			"key": "email",
+			"value": "tintin@gmail.com",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "tintin1234",
+			"type": "string"
+		}
+	]
+}
